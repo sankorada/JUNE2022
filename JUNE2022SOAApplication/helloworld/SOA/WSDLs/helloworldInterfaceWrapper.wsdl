@@ -1,0 +1,21 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="helloworldInterface"
+     targetNamespace="http://practice.com/demo/helloworld/helloworldInterface"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:tns="http://practice.com/demo/helloworld/helloworldInterface"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://practice.com/demo/helloworld/request"
+    >
+    <plnk:partnerLinkType name="HelloworldService">
+        <plnk:role name="helloworldPorttype" portType="tns:helloworldPorttype"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://practice.com/demo/helloworld/helloworldInterface" location="helloworldInterface.wsdl"/>
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://practice.com/demo/helloworld/request" schemaLocation="../Schemas/requestdoc.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+</wsdl:definitions>

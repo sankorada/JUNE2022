@@ -1,0 +1,31 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="helloworldInterface"
+     targetNamespace="http://practice.com/demo/helloworld/helloworldInterface"
+     xmlns:tns="http://practice.com/demo/helloworld/helloworldInterface"
+     xmlns:inp1="http://practice.com/demo/helloworld/request"
+     xmlns:inp2="http://practice.com/demo/helloworld/response"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://practice.com/demo/helloworld/request" schemaLocation="../Schemas/requestdoc.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://practice.com/demo/helloworld/response" schemaLocation="../Schemas/responsedoc.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="xyz" element="inp1:request"/>
+    </wsdl:message>
+    <wsdl:message name="replyMessage">
+        <wsdl:part name="body" element="inp2:response"/>
+    </wsdl:message>
+    <wsdl:portType name="helloworldPorttype">
+        <wsdl:operation name="helloworld">
+            <wsdl:input message="tns:requestMessage"/>
+            <wsdl:output message="tns:replyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

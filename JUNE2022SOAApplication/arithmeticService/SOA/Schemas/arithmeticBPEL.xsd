@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+        targetNamespace="http://pratice.com/JUNE2022SOAApplication/arithmeticService/arithmeticBPEL"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+ 
+ 
+  <element name="requestSchema">
+    <complexType>
+      <sequence>
+        <element name="inputOne" type="integer"/>
+        <element name="inputTwo" type="integer"/>
+      </sequence>
+    </complexType>
+  </element>
+  
+  
+  <element name="responseSchema">
+    <complexType>
+      <sequence>
+        <element name="operationName" type="string"/>
+        <element name="result" type="integer"/>
+      </sequence>
+    </complexType>
+  </element>
+  
+  
+  
+</schema>
