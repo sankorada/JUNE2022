@@ -13,8 +13,9 @@
            xmlns:ui="http://xmlns.oracle.com/soa/designer/"
            xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
   <import namespace="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL"
-          location="WSDLs/BillingSystemBPEL.wsdl" importType="wsdl"/>
-  <service name="billingsystembpel_client_ep" ui:wsdlLocation="WSDLs/BillingSystemBPEL.wsdl">
+          location="oramds:/apps/JUNE2022SOAApplication/BillingSystem/WSDLs/BillingSystemBPEL.wsdl" importType="wsdl"/>
+  <service name="billingsystembpel_client_ep"
+           ui:wsdlLocation="oramds:/apps/JUNE2022SOAApplication/BillingSystem/WSDLs/BillingSystemBPEL.wsdl">
     <interface.wsdl interface="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.interface(BillingSystemBPEL)"
                     callbackInterface="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.interface(BillingSystemBPELCallback)"/>
     <binding.ws port="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.endpoint(billingsystembpel_client_ep/BillingSystemBPEL_pt)"/>
@@ -27,7 +28,8 @@
   <component name="BillingSystemBPEL" version="2.0">
     <implementation.bpel src="BPEL/BillingSystemBPEL.bpel"/>
     <componentType>
-      <service name="billingsystembpel_client" ui:wsdlLocation="WSDLs/BillingSystemBPEL.wsdl">
+      <service name="billingsystembpel_client"
+               ui:wsdlLocation="oramds:/apps/JUNE2022SOAApplication/BillingSystem/WSDLs/BillingSystemBPEL.wsdl">
         <interface.wsdl interface="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.interface(BillingSystemBPEL)"
                         callbackInterface="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.interface(BillingSystemBPELCallback)"/>
       </service>

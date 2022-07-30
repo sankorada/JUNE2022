@@ -28,7 +28,8 @@
          xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
 
-    <import ui:processWSDL="true" namespace="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL" location="../WSDLs/BillingSystemBPEL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import ui:processWSDL="true" namespace="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL"
+            location="oramds:/apps/JUNE2022SOAApplication/BillingSystem/WSDLs/BillingSystemBPEL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         PARTNERLINKS                                                      

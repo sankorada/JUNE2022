@@ -6,13 +6,13 @@
       <!--SPECIFICATION OF MAP SOURCES AND TARGETS, DO NOT MODIFY.-->
       <oracle-xsl-mapper:mapSources>
          <oracle-xsl-mapper:source type="WSDL">
-            <oracle-xsl-mapper:schema location="../WSDLs/BillingSystemBPEL.wsdl"/>
+            <oracle-xsl-mapper:schema location="oramds:/apps/JUNE2022SOAApplication/BillingSystem/WSDLs/BillingSystemBPEL.wsdl"/>
             <oracle-xsl-mapper:rootElement name="bsRequest" namespace="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL"/>
          </oracle-xsl-mapper:source>
       </oracle-xsl-mapper:mapSources>
       <oracle-xsl-mapper:mapTargets>
          <oracle-xsl-mapper:target type="WSDL">
-            <oracle-xsl-mapper:schema location="../WSDLs/BillingSystemBPEL.wsdl"/>
+            <oracle-xsl-mapper:schema location="oramds:/apps/JUNE2022SOAApplication/BillingSystem/WSDLs/BillingSystemBPEL.wsdl"/>
             <oracle-xsl-mapper:rootElement name="bsResponse" namespace="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL"/>
          </oracle-xsl-mapper:target>
       </oracle-xsl-mapper:mapTargets>
