@@ -29,6 +29,7 @@
       <hash><url n="URL" path="CardValidationSystem/CardValidationSystem.jpr"/></hash>
       <hash><url n="URL" path="DesigntimeMDSProject/DesigntimeMDSProject.jpr"/></hash>
       <hash><url n="URL" path="helloworld/helloworld.jpr"/></hash>
+      <hash><url n="URL" path="OrderProcessSystem/OrderProcessSystem.jpr"/></hash>
       <hash><url n="URL" path="Project1/Project1.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
