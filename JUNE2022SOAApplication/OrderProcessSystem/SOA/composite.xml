@@ -53,7 +53,7 @@
              ui:wsdlLocation="oramds:/apps/JUNE2022SOAApplication/CardValidationSystem/WSDLs/CVSBPEL.wsdl">
     <interface.wsdl interface="http://practice.com/JUNE2022SOAApplication/CardValidationSystem/CVSBPEL#wsdl.interface(CVSBPEL)"/>
     <binding.ws port="http://practice.com/JUNE2022SOAApplication/CardValidationSystem/CVSBPEL#wsdl.endpoint(cvsbpel_client_ep/CVSBPEL_pt)"
-                location="http://localhost:7101/soa-infra/services/default/CardValidationSystem/cvsbpel_client_ep?WSDL"
+                location="xyz"
                 soapVersion="1.1">
       <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
     </binding.ws>
@@ -63,7 +63,7 @@
     <interface.wsdl interface="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.interface(BillingSystemBPEL)"
                     callbackInterface="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.interface(BillingSystemBPELCallback)"/>
     <binding.ws port="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.endpoint(billingsystembpel_client_ep/BillingSystemBPEL_pt)"
-                location="http://localhost:7101/soa-infra/services/default/BillingSystem/billingsystembpel_client_ep?WSDL"
+                location="abc"
                 soapVersion="1.1">
       <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
     </binding.ws>

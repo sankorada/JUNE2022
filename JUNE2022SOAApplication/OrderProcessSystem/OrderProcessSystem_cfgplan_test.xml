@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+   <composite name="OrderProcessSystem">
+      <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <service name="opsbpel_client_ep">
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://pratice.com/JUNE2022SOAApplication/OrderProcessSystem/OPSBPEL#wsdl.endpoint(opsbpel_client_ep/OPSBPEL_pt)</replace>
+            </attribute>
+         </binding>
+         <callback>
+            <binding type="ws">
+               <attribute name="port">
+                  <replace>http://pratice.com/JUNE2022SOAApplication/OrderProcessSystem/OPSBPEL#wsdl.endpoint(opsbpel_client_ep/OPSBPELCallback_pt)</replace>
+               </attribute>
+            </binding>
+         </callback>
+      </service>
+      <property name="compositeID">
+         <replace>3413726f-2e1b-46c5-8e5f-e7c420f463de</replace>
+      </property>
+      <property name="productVersion">
+         <replace>12.2.1.4.0.190828</replace>
+      </property>
+      <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+      <component name="OPSBPEL">
+         <property name="bpel.config.oneWayDeliveryPolicy">
+            <replace>async.persist</replace>
+         </property>
+      </component>
+      <reference name="CVSRefence">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://practice.com/JUNE2022SOAApplication/CardValidationSystem/CVSBPEL#wsdl.endpoint(cvsbpel_client_ep/CVSBPEL_pt)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>http://localhost:7101/soa-infra/services/test/CardValidationSystem/cvsbpel_client_ep?WSDL</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>WSDLDriven</replace>
+            </property>
+         </binding>
+      </reference>
+      <reference name="BSReference">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.endpoint(billingsystembpel_client_ep/BillingSystemBPEL_pt)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>http://localhost:7101/soa-infra/services/test/BillingSystem/billingsystembpel_client_ep?WSDL</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>WSDLDriven</replace>
+            </property>
+         </binding>
+         <callback>
+            <binding type="ws">
+               <attribute name="port">
+                  <replace>http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL#wsdl.endpoint(billingsystembpel_client_ep/BillingSystemBPELCallback_pt)</replace>
+               </attribute>
+            </binding>
+         </callback>
+      </reference>
+   </composite>
+   <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for adapter: 
+	<jca:property name="QueueName"><replace>medmq1</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+   <wsdlAndSchema name="Schemas/OPSBPEL.xsd|WSDLs/OPSBPEL.wsdl">
+      <searchReplace>
+         <search/>
+         <replace/>
+      </searchReplace>
+   </wsdlAndSchema>
+</SOAConfigPlan>
