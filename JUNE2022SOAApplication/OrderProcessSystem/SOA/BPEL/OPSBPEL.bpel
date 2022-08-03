@@ -146,7 +146,7 @@
                             <for>'PT10S'</for>
                             <assign name="Assign2">
                                 <copy>
-                                    <from>"No response received from billing system"</from>
+                                    <from>"No response received from bulling system"</from>
                                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:orderStatus</to>
                                 </copy>
                             </assign>

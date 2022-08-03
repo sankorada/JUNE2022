@@ -78,10 +78,6 @@
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
          <string v="SOA"/>
-         <string v="WSDL"/>
-         <string v="WSPolicy"/>
-         <string v="XML"/>
-         <string v="XML_SCHEMA"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.compiler.OjcConfiguration">
@@ -104,6 +100,8 @@
          <string v=".xml"/>
          <string v=".xsd"/>
          <string v=".xsl"/>
+         <string v=".exm"/>
+         <string v=".xml"/>
          <string v=".exm"/>
          <string v=".xml"/>
       </list>
@@ -308,12 +306,13 @@
          <list n="pattern-filters">
             <string v="-SCA-INF/classes"/>
             <string v="+**"/>
+            <string v="-SCA-INF/classes"/>
+            <string v="+**"/>
+            <string v="+composite.xml"/>
          </list>
          <list n="url-path">
             <url path="SOA/"/>
          </list>
       </hash>
    </hash>
-   <value n="SCA_BPEL_FOLDER_PROPERTY_NAME" v="BPEL/"/>
-   <value n="SOA_TRANSFORMATION_FOLDER_NAME" v="Transformations/"/>
 </jpr:project>
