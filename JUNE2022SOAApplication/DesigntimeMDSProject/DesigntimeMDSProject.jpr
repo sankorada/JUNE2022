@@ -131,6 +131,10 @@
                      <hash n="filters">
                         <list n="rules">
                            <hash>
+                              <value n="pattern" v="JUNE2022SOAApplication/BillingSystem/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
                               <value n="pattern" v="**"/>
                               <value n="type" v="0"/>
                            </hash>

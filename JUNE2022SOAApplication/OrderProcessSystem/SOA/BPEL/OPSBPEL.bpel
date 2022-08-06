@@ -29,7 +29,8 @@
          xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
          xmlns:ns2="http://practice.com/JUNE2022SOAApplication/BillingSystem/BillingSystemBPEL">
-
+    <import namespace="http://schemas.oracle.com/bpel/extension" location="../WSDLs/RuntimeFault.wsdl"
+            importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import ui:processWSDL="true" namespace="http://pratice.com/JUNE2022SOAApplication/OrderProcessSystem/OPSBPEL" location="../WSDLs/OPSBPEL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,6 +85,33 @@
                 <variable name="InvokeCVSInputVariable" messageType="ns1:CVSBPELRequestMessage"/>
                 <variable name="InvokeCVSOutputVariable" messageType="ns1:CVSBPELResponseMessage"/>
             </variables>
+            <faultHandlers>
+                <catch faultName="bpelx:bindingFault" faultVariable="bindingFaultVar"
+                       faultMessageType="bpelx:RuntimeFaultMessage">
+                    <empty name="Empty1"/>
+                </catch>
+                <catch faultName="bpelx:remoteFault" faultVariable="remoteFaultVar"
+                       faultMessageType="bpelx:RuntimeFaultMessage">
+                    <assign name="Assign5">
+                        <copy>
+                            <from>$remoteFaultVar.summary</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:orderStatus</to>
+                        </copy>
+                        <copy>
+                            <from>ora:getFaultName()</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccValdationStatus</to>
+                        </copy>
+                    </assign>
+                </catch>
+                <catchAll>
+                    <assign name="Assign3">
+                        <copy>
+                            <from>"ERROR"</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccValdationStatus</to>
+                        </copy>
+                    </assign>
+                </catchAll>
+            </faultHandlers>
             <sequence name="Sequence1">
                 <assign name="AssignCVSReqMappings">
                     <copy>
@@ -162,6 +190,18 @@
                 <assign name="AssignInvalidOrder">
                     <copy>
                         <from>"not able to process your order, please provide proper credit card"</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:orderStatus</to>
+                    </copy>
+                </assign>
+            </elseif>
+            <elseif>
+                <documentation>
+                    <![CDATA[ERROR CC]]>
+                </documentation>
+                <condition>$outputVariable.payload/client:ccValdationStatus = 'ERROR'</condition>
+                <assign name="Assign4">
+                    <copy>
+                        <from>"CC Validation failed due to technical issues, wait for some time, try again later"</from>
                         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:orderStatus</to>
                     </copy>
                 </assign>
