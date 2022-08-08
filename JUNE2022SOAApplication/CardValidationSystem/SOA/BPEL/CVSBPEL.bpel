@@ -93,7 +93,7 @@
               </copy>
             </assign>
             <reply name="ReplyFault" faultName="client:invalidccfault" partnerLink="cvsbpel_client"
-                   variable="outputVariable" portType="client:CVSBPEL" operation="process"/>
+                   variable="faultVariable" portType="client:CVSBPEL" operation="process"/>
           </sequence>
         </catch>
       </faultHandlers>

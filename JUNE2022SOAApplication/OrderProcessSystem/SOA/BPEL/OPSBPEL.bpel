@@ -86,6 +86,14 @@
                 <variable name="InvokeCVSOutputVariable" messageType="ns1:CVSBPELResponseMessage"/>
             </variables>
             <faultHandlers>
+                <catch faultName="ns1:invalidccfault" faultVariable="invalidccfaultVar"
+                       faultMessageType="ns1:businessFaultMessage"><assign name="Assign3"
+                                                                           xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <copy>
+         <from>"ERROR"</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccValdationStatus</to>
+      </copy>
+   </assign></catch>
                 <catch faultName="bpelx:bindingFault" faultVariable="bindingFaultVar"
                        faultMessageType="bpelx:RuntimeFaultMessage">
                     <empty name="Empty1"/>
