@@ -30,6 +30,8 @@
   </service>
   <property name="compositeID" type="xs:string" many="false">3413726f-2e1b-46c5-8e5f-e7c420f463de</property>
   <property name="productVersion" type="xs:string" many="false">12.2.1.4.0.190828</property>
+  <property name="oracle.composite.faultPolicyFile" type="xs:string" many="false">fault-policies.xml</property>
+  <property name="oracle.composite.faultBindingFile" type="xs:string" many="false">fault-bindings.xml</property>
   <component name="OPSBPEL" version="2.0">
     <implementation.bpel src="BPEL/OPSBPEL.bpel"/>
     <componentType>
