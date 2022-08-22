@@ -1,0 +1,55 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Mon Aug 22 07:33:26 IST 2022
+  Author:  DELL
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="StuGradeCalcBPEL"
+               targetNamespace="http://xmlns.oracle.com/JUNE2022SOAApplication/CalculateStuGrade/StuGradeCalcBPEL"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/JUNE2022SOAApplication/CalculateStuGrade/StuGradeCalcBPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/CalculateStuGrade/STU_INFO_DBPOLLING"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/CalculateStuGrade/STU_GRADE_INSERT">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="STU_INFO_DBPOLLING" partnerLinkType="ns1:STU_INFO_DBPOLLING_plt"
+                 myRole="STU_INFO_DBPOLLING_role"/>
+    <partnerLink name="STU_GRADE_INSERT" partnerLinkType="ns2:STU_GRADE_INSERT_plt"
+                 partnerRole="STU_GRADE_INSERT_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="InputVariable" messageType="ns1:StuInfoCollection_msg"/>
+    <variable name="InvokeStuGradeInputVariable" messageType="ns2:StuResultCollection_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes" partnerLink="STU_INFO_DBPOLLING"
+             portType="ns1:STU_INFO_DBPOLLING_ptt" operation="receive" variable="InputVariable"/>
+    <assign name="Transformation1">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/CalcStudentGrade.xsl", $InputVariable.StuInfoCollection)</from>
+        <to variable="InvokeStuGradeInputVariable" part="StuResultCollection"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeStuGrade" partnerLink="STU_GRADE_INSERT"
+            portType="ns2:STU_GRADE_INSERT_ptt" operation="merge" inputVariable="InvokeStuGradeInputVariable"
+            bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

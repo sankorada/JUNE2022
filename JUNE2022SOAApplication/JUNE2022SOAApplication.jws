@@ -26,10 +26,12 @@
    <list n="listOfChildren">
       <hash><url n="URL" path="arithmeticService/arithmeticService.jpr"/></hash>
       <hash><url n="URL" path="BillingSystem/BillingSystem.jpr"/></hash>
+      <hash><url n="URL" path="CalculateStuGrade/CalculateStuGrade.jpr"/></hash>
       <hash><url n="URL" path="CardValidationSystem/CardValidationSystem.jpr"/></hash>
       <hash><url n="URL" path="DesigntimeMDSProject/DesigntimeMDSProject.jpr"/></hash>
       <hash><url n="URL" path="helloworld/helloworld.jpr"/></hash>
       <hash><url n="URL" path="OrderProcessSystem/OrderProcessSystem.jpr"/></hash>
+      <hash><url n="URL" path="PracticeAdapters/PracticeAdapters.jpr"/></hash>
       <hash><url n="URL" path="Project1/Project1.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">

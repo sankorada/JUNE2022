@@ -1,0 +1,96 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Aug 10 08:06:33 IST 2022
+  Author:  DELL
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="PracticeAdapterBPEL"
+               targetNamespace="http://xmlns.oracle.com/JUNE2022SOAApplication/PracticeAdapters/PracticeAdapterBPEL"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/JUNE2022SOAApplication/PracticeAdapters/PracticeAdapterBPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/JUNE2022SOAApplication/PracticeAdapters/File_Read_stuInfo"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/JUNE2022SOAApplication/PracticeAdapters/File_Write_stuResult"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/PracticeAdapters/DB_Insert_Stu_Info"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/JUNE2022SOAApplication/PracticeAdapters/File_Read_stuInfo"
+          location="../WSDLs/File_Read_stuInfo.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="File_Read_stuInfo" partnerLinkType="ns1:Read_plt" myRole="Read_role"/>
+    <partnerLink name="File_Write_stuResult" partnerLinkType="ns2:Write_plt" partnerRole="Write_role"/>
+    <partnerLink name="DB_Insert_Stu_Info" partnerLinkType="ns3:DB_Insert_Stu_Info_plt"
+                 partnerRole="DB_Insert_Stu_Info_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="File_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="FILE_NAME" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <pick name="Pick1" createInstance="yes">
+      <onMessage partnerLink="File_Read_stuInfo" variable="File_Read_InputVariable" portType="ns1:Read_ptt"
+                 operation="Read">
+        <bpelx:fromProperties>
+          <bpelx:fromProperty name="jca.file.FileName" variable="FILE_NAME"/>
+        </bpelx:fromProperties>
+        <empty name="Empty1"/>
+      </onMessage>
+    </pick>
+    <scope name="Scope_File_Write">
+      <variables>
+        <variable name="InvokeStuResultFileWriteInputVariable" messageType="ns2:Write_msg"/>
+      </variables>
+      <sequence name="Sequence1">
+        <assign name="Transformation1">
+          <bpelx:annotation>
+            <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from>ora:doXSLTransformForDoc("../Transformations/StuResultTransformation.xsl", $File_Read_InputVariable.body)</from>
+            <to variable="InvokeStuResultFileWriteInputVariable" part="body"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeStuResult" partnerLink="File_Write_stuResult" portType="ns2:Write_ptt" operation="Write"
+                inputVariable="InvokeStuResultFileWriteInputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="jca.file.FileName" variable="FILE_NAME"/>
+          </bpelx:toProperties>
+        </invoke>
+      </sequence>
+    </scope>
+    <scope name="Scope_DB_Insert">
+      <variables>
+        <variable name="InvokeDB_Insert_InputVariable" messageType="ns3:StuInfoCollection_msg"/>
+      </variables>
+      <sequence name="Sequence2">
+        <assign name="Transformation2">
+          <bpelx:annotation>
+            <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from>ora:doXSLTransformForDoc("../Transformations/FileReadToDBInsert.xsl", $File_Read_InputVariable.body)</from>
+            <to variable="InvokeDB_Insert_InputVariable" part="StuInfoCollection"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeDB_Insert" bpelx:invokeAsDetail="no" partnerLink="DB_Insert_Stu_Info"
+                portType="ns3:DB_Insert_Stu_Info_ptt" operation="merge" inputVariable="InvokeDB_Insert_InputVariable"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

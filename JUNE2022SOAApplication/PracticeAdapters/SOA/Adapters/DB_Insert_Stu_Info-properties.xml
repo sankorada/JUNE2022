@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="STU_INFO.ENG:db_column_precision">38</entry>
+   <entry key="STU_INFO:db_table_type">TABLE</entry>
+   <entry key="STU_INFO.ENG:db_column_type">NUMBER</entry>
+   <entry key="STU_INFO.ENG:db_column_scale">0</entry>
+   <entry key="STU_INFO.MATHS:db_column_scale">0</entry>
+   <entry key="STU_INFO.STU_NAME:db_column_size">20</entry>
+   <entry key="STU_INFO.HINDI:db_column_type">NUMBER</entry>
+   <entry key="STU_INFO.STU_ID:db_column_scale">0</entry>
+   <entry key="STU_INFO.HINDI:db_column_scale">0</entry>
+   <entry key="STU_INFO.STU_NAME:db_column_not_null">false</entry>
+   <entry key="STU_INFO.MATHS:db_column_precision">38</entry>
+   <entry key="STU_INFO.HINDI:db_column_not_null">false</entry>
+   <entry key="STU_INFO.MATHS:db_column_type">NUMBER</entry>
+   <entry key="STU_INFO.ENG:db_column_not_null">false</entry>
+   <entry key="root_descriptor_alias">STU_INFO</entry>
+   <entry key="STU_INFO.STU_NAME:db_column_type">VARCHAR2</entry>
+   <entry key="STU_INFO:db_column_4">MATHS</entry>
+   <entry key="STU_INFO:db_column_3">HINDI</entry>
+   <entry key="STU_INFO:db_column_2">ENG</entry>
+   <entry key="STU_INFO:db_column_1">STU_NAME</entry>
+   <entry key="STU_INFO:db_column_0">STU_ID</entry>
+   <entry key="STU_INFO.MATHS:db_column_not_null">false</entry>
+   <entry key="STU_INFO.STU_ID:db_column_precision">38</entry>
+   <entry key="STU_INFO.HINDI:db_column_precision">38</entry>
+   <entry key="STU_INFO.STU_ID:db_column_type">NUMBER</entry>
+   <entry key="STU_INFO.STU_ID:db_column_not_null">false</entry>
+</properties>
