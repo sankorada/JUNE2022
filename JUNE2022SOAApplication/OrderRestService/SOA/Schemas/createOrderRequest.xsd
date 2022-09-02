@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://pratice.com/order/create/request" targetNamespace="http://pratice.com/order/create/request" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+   <xsd:element name="orderCreateRequest">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="ord_id" type="xsd:integer"/>
+            <xsd:element name="cust_id" type="xsd:integer"/>
+            <xsd:element name="cust_name" type="xsd:string"/>
+            <xsd:element name="item_name" type="xsd:string"/>
+            <xsd:element name="item_cost" type="xsd:integer"/>
+            <xsd:element name="status" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

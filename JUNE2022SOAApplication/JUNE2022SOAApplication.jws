@@ -32,6 +32,7 @@
       <hash><url n="URL" path="helloworld/helloworld.jpr"/></hash>
       <hash><url n="URL" path="JMSConsumerProject/JMSConsumerProject.jpr"/></hash>
       <hash><url n="URL" path="OrderProcessSystem/OrderProcessSystem.jpr"/></hash>
+      <hash><url n="URL" path="OrderRestService/OrderRestService.jpr"/></hash>
       <hash><url n="URL" path="PracticeAdapters/PracticeAdapters.jpr"/></hash>
       <hash><url n="URL" path="PracticeLogicalPolling/PracticeLogicalPolling.jpr"/></hash>
       <hash><url n="URL" path="Project1/Project1.jpr"/></hash>

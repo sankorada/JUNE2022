@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="ORDER_INFO.CUST_ID:db_column_precision">38</entry>
+   <entry key="ORDER_INFO.ITEM_COST:db_column_scale">0</entry>
+   <entry key="ORDER_INFO:db_column_5">STATUS</entry>
+   <entry key="ORDER_INFO.CUST_ID:db_column_scale">0</entry>
+   <entry key="ORDER_INFO:db_column_4">ITEM_COST</entry>
+   <entry key="ORDER_INFO:db_table_type">TABLE</entry>
+   <entry key="ORDER_INFO:db_column_3">ITEM_NAME</entry>
+   <entry key="ORDER_INFO.CUST_NAME:db_column_not_null">false</entry>
+   <entry key="ORDER_INFO:db_column_2">CUST_NAME</entry>
+   <entry key="ORDER_INFO:db_column_1">CUST_ID</entry>
+   <entry key="ORDER_INFO:db_column_0">ORD_ID</entry>
+   <entry key="ORDER_INFO.ITEM_NAME:db_column_not_null">false</entry>
+   <entry key="ORDER_INFO.ITEM_NAME:db_column_type">VARCHAR2</entry>
+   <entry key="ORDER_INFO.ITEM_COST:db_column_not_null">false</entry>
+   <entry key="ORDER_INFO.CUST_NAME:db_column_type">VARCHAR2</entry>
+   <entry key="ORDER_INFO.STATUS:db_column_size">20</entry>
+   <entry key="ORDER_INFO.ITEM_COST:db_column_type">NUMBER</entry>
+   <entry key="ORDER_INFO.ORD_ID:db_column_scale">0</entry>
+   <entry key="ORDER_INFO.CUST_ID:db_column_type">NUMBER</entry>
+   <entry key="ORDER_INFO.ITEM_COST:db_column_precision">38</entry>
+   <entry key="ORDER_INFO.ORD_ID:db_column_not_null">false</entry>
+   <entry key="ORDER_INFO.ITEM_NAME:db_column_size">20</entry>
+   <entry key="ORDER_INFO.ORD_ID:db_column_precision">38</entry>
+   <entry key="ORDER_INFO.CUST_NAME:db_column_size">20</entry>
+   <entry key="root_descriptor_alias">ORDER_INFO</entry>
+   <entry key="ORDER_INFO.CUST_ID:db_column_not_null">false</entry>
+   <entry key="ORDER_INFO.STATUS:db_column_not_null">false</entry>
+   <entry key="ORDER_INFO.ORD_ID:db_column_type">NUMBER</entry>
+   <entry key="ORDER_INFO.STATUS:db_column_type">VARCHAR2</entry>
+</properties>

@@ -61,25 +61,20 @@
       <value n="oracle.toplink.workbench.addin.migration.TopLinkProjectMigrator" v="11.1.1.1.0"/>
    </hash>
    <list n="contentSets">
-      <string v="oracle.mds.internal.dt.ide.MDSLibraryCustCSProvider/mdsContentSet"/>
-      <string v="oracle.mds.internal.dt.ide.MDSADFLibVirtualNodeCSProvider/mdsLibVirtualNodeContentSet"/>
       <string v="oracle.jdeveloper.model.J2eeSettings/webContentSet"/>
       <string v="oracle.jdeveloper.model.PathsConfiguration/javaContentSet"/>
       <string v="oracle.ide.model.ResourcePaths/resourcesContentSet"/>
+      <string v="oracle.mds.internal.dt.ide.MDSLibraryCustCSProvider/mdsContentSet"/>
+      <string v="oracle.mds.internal.dt.ide.MDSADFLibVirtualNodeCSProvider/mdsLibVirtualNodeContentSet"/>
       <string v="oracle.jdeveloper.offlinedb.model.OfflineDBProjectSettings/offlineDBContentSet"/>
       <string v="oracle.adfdtinternal.model.ide.settings.ADFMSettings/adfmContentSet"/>
       <string v="oracle.bm.commonIde.data.project.ModelerProjectSettings/modelersContentSet"/>
       <string v="oracle.tip.tools.ide.fabric.addin.SCAContentSetProvider/sca-content"/>
-      <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
       <string v="oracle.sb.tooling.ide.core.projects.SbProjectSettings/sbContentSet"/>
       <string v="oracle.tip.tools.ide.ess.addin.ESSContentSetProvider/ess-content"/>
+      <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
-   <value n="defaultPackage" v="calculatestugrade"/>
-   <hash n="oracle.ide.model.ResourcePaths">
-      <hash n="resourcesContentSet">
-         <list n="url-path"/>
-      </hash>
-   </hash>
+   <value n="defaultPackage" v="orderrestservice"/>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
          <string v="SOA"/>
@@ -118,7 +113,7 @@
    </hash>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
       <hash n="profileDefinitions">
-         <hash n="CalculateStuGrade">
+         <hash n="OrderRestService">
             <hash n="archiveOptions">
                <value n="hasManifest" v="false"/>
             </hash>
@@ -205,18 +200,18 @@
                   </hash>
                </list>
             </hash>
-            <url n="jarURL" path="deploy/sca_CalculateStuGrade.jar"/>
+            <url n="jarURL" path="deploy/sca_OrderRestService.jar"/>
             <value n="profileClass" v="oracle.tip.tools.ide.fabric.deploy.sar.SarProfile"/>
-            <value n="profileName" v="CalculateStuGrade"/>
+            <value n="profileName" v="OrderRestService"/>
          </hash>
       </hash>
       <list n="profileList">
-         <string v="CalculateStuGrade"/>
+         <string v="OrderRestService"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
-      <value n="j2eeWebAppName" v="JUNE2022SOAApplication-CalculateStuGrade-webapp"/>
-      <value n="j2eeWebContextRoot" v="JUNE2022SOAApplication-CalculateStuGrade-context-root"/>
+      <value n="j2eeWebAppName" v="JUNE2022SOAApplication-OrderRestService-webapp"/>
+      <value n="j2eeWebContextRoot" v="JUNE2022SOAApplication-OrderRestService-context-root"/>
    </hash>
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="javaContentSet">
@@ -319,5 +314,4 @@
       </hash>
    </hash>
    <value n="SCA_BPEL_FOLDER_PROPERTY_NAME" v="BPEL/"/>
-   <value n="SOA_TRANSFORMATION_FOLDER_NAME" v="Transformations/"/>
 </jpr:project>

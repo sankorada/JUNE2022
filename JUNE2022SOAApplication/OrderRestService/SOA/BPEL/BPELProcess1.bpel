@@ -1,0 +1,104 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Fri Sep 02 07:58:15 IST 2022
+  Author:  DELL
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/JUNE2022SOAApplication/OrderRestService/BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/JUNE2022SOAApplication/OrderRestService/BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/JUNE2022SOAApplication/OrderRestService/orderRestService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/OrderRestService/ORDER_INFO"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/ORDER_INFO"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://pratice.com/order/create/request"
+         xmlns:ns5="http://practice.com/order/create/response"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="orderRestService" partnerLinkType="ns1:orderRestService" myRole="orderRestServiceProvider"/>
+    <partnerLink name="ORDER_INFO" partnerLinkType="ns2:ORDER_INFO_plt" partnerRole="ORDER_INFO_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="createOrderInputVariable" messageType="ns1:createOperation_inputMessage"/>
+    <variable name="InvokeInsertOrderInputVariable" messageType="ns2:OrderInfoCollection_msg"/>
+    <variable name="createOrderOutputVariable" messageType="ns1:createOperation_outputMessage"/>
+  </variables>
+  <sequence name="main">
+    <pick name="Pick1" createInstance="yes">
+      <onMessage partnerLink="orderRestService" variable="createOrderInputVariable" portType="ns1:orderRestService_ptt"
+                 operation="createOperation">
+        <sequence name="Sequence1">
+          <assign name="Assign1">
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:ord_id</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertOrderInputVariable.OrderInfoCollection/ns4:OrderInfo/ns4:ordId</to>
+            </copy>
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:cust_id</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertOrderInputVariable.OrderInfoCollection/ns4:OrderInfo/ns4:custId</to>
+            </copy>
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:cust_name</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertOrderInputVariable.OrderInfoCollection/ns4:OrderInfo/ns4:custName</to>
+            </copy>
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:item_name</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertOrderInputVariable.OrderInfoCollection/ns4:OrderInfo/ns4:itemName</to>
+            </copy>
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:item_cost</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertOrderInputVariable.OrderInfoCollection/ns4:OrderInfo/ns4:itemCost</to>
+            </copy>
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertOrderInputVariable.OrderInfoCollection/ns4:OrderInfo/ns4:status</to>
+            </copy>
+          </assign>
+          <invoke name="InvokeInsertOrder" partnerLink="ORDER_INFO" portType="ns2:ORDER_INFO_ptt" operation="insert"
+                  inputVariable="InvokeInsertOrderInputVariable" bpelx:invokeAsDetail="no"/>
+          <assign name="Assign2">
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:ord_id</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$createOrderOutputVariable.reply/ns5:ordid</to>
+            </copy>
+            <copy>
+              <from>$createOrderInputVariable.request/ns3:cust_id</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$createOrderOutputVariable.reply/ns5:custid</to>
+            </copy>
+            <copy>
+              <from>"Order Created into internal application"</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$createOrderOutputVariable.reply/ns5:orderstatus</to>
+            </copy>
+          </assign>
+          <reply name="ReplyCreateOrder" partnerLink="orderRestService" variable="createOrderOutputVariable"
+                 portType="ns1:orderRestService_ptt" operation="createOperation"/>
+        </sequence>
+      </onMessage>
+    </pick>
+  </sequence>
+</process>

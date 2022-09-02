@@ -1,0 +1,34 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="orderRestService"
+     targetNamespace="http://xmlns.oracle.com/JUNE2022SOAApplication/OrderRestService/orderRestService"
+     xmlns:tns="http://xmlns.oracle.com/JUNE2022SOAApplication/OrderRestService/orderRestService"
+     xmlns:inp1="http://pratice.com/order/create/request"
+     xmlns:inp2="http://practice.com/order/create/response"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="orderRestService">
+        <plnk:role name="orderRestServiceProvider" portType="tns:orderRestService_ptt"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://pratice.com/order/create/request" schemaLocation="../Schemas/createOrderRequest.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://practice.com/order/create/response" schemaLocation="../Schemas/createOrderResponse.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="createOperation_inputMessage">
+        <wsdl:part name="request" element="inp1:orderCreateRequest"/>
+    </wsdl:message>
+    <wsdl:message name="createOperation_outputMessage">
+        <wsdl:part name="reply" element="inp2:createOrderResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="orderRestService_ptt">
+        <wsdl:operation name="createOperation">
+            <wsdl:input message="tns:createOperation_inputMessage"/>
+            <wsdl:output message="tns:createOperation_outputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

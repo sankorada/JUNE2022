@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="ORDER_INFO"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/OrderRestService/ORDER_INFO"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/OrderRestService/ORDER_INFO"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ORDER_INFO"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="ORDER_INFO_plt" >
+    <plt:role name="ORDER_INFO_role" >
+      <plt:portType name="tns:ORDER_INFO_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ORDER_INFO" schemaLocation="../Schemas/ORDER_INFO_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="OrderInfoCollection_msg">
+        <wsdl:part name="OrderInfoCollection" element="top:OrderInfoCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="ORDER_INFO_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:OrderInfoCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
