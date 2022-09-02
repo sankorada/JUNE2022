@@ -20,7 +20,8 @@
          xmlns:ui="http://xmlns.oracle.com/soa/designer"
          xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/JUNE2022SOAApplication/PracticeAdapters/File_Write_stuResult"
          xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/PracticeAdapters/DB_Insert_Stu_Info"
-         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/jms/JUNE2022SOAApplication/PracticeAdapters/Stu_Result_JMSProducer">
 
   <!--
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +38,8 @@
     <partnerLink name="File_Write_stuResult" partnerLinkType="ns2:Write_plt" partnerRole="Write_role"/>
     <partnerLink name="DB_Insert_Stu_Info" partnerLinkType="ns3:DB_Insert_Stu_Info_plt"
                  partnerRole="DB_Insert_Stu_Info_role"/>
+    <partnerLink name="Stu_Result_JMSProducer" partnerLinkType="ns4:Produce_Message_plt"
+                 partnerRole="Produce_Message_role"/>
   </partnerLinks>
   <variables>
     <variable name="File_Read_InputVariable" messageType="ns1:Read_msg"/>
@@ -52,45 +55,78 @@
         <empty name="Empty1"/>
       </onMessage>
     </pick>
-    <scope name="Scope_File_Write">
-      <variables>
-        <variable name="InvokeStuResultFileWriteInputVariable" messageType="ns2:Write_msg"/>
-      </variables>
-      <sequence name="Sequence1">
-        <assign name="Transformation1">
-          <bpelx:annotation>
-            <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
-          </bpelx:annotation>
-          <copy>
-            <from>ora:doXSLTransformForDoc("../Transformations/StuResultTransformation.xsl", $File_Read_InputVariable.body)</from>
-            <to variable="InvokeStuResultFileWriteInputVariable" part="body"/>
-          </copy>
-        </assign>
-        <invoke name="InvokeStuResult" partnerLink="File_Write_stuResult" portType="ns2:Write_ptt" operation="Write"
-                inputVariable="InvokeStuResultFileWriteInputVariable" bpelx:invokeAsDetail="no">
-          <bpelx:toProperties>
-            <bpelx:toProperty name="jca.file.FileName" variable="FILE_NAME"/>
-          </bpelx:toProperties>
-        </invoke>
+    <flow name="Flow1">
+      <sequence name="Sequence4">
+        <scope name="Scope_JMS_Produce">
+          <variables>
+            <variable name="InvokeStuResultJMSProducerInputVariable" messageType="ns4:Produce_Message_msg"/>
+          </variables>
+          <sequence name="Sequence5">
+            <assign name="Transformation3">
+              <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from>ora:doXSLTransformForDoc("../Transformations/Transformation3_1.xsl", $File_Read_InputVariable.body)</from>
+                <to variable="InvokeStuResultJMSProducerInputVariable" part="body"/>
+              </copy>
+            </assign>
+            <invoke name="InvokeStuResultJMSProducer" bpelx:invokeAsDetail="no" partnerLink="Stu_Result_JMSProducer"
+                    portType="ns4:Produce_Message_ptt" operation="Produce_Message"
+                    inputVariable="InvokeStuResultJMSProducerInputVariable">
+              <bpelx:toProperties>
+                <bpelx:toProperty name="jca.jms.JMSProperty.filename" variable="FILE_NAME"/>
+              </bpelx:toProperties>
+            </invoke>
+          </sequence>
+        </scope>
       </sequence>
-    </scope>
-    <scope name="Scope_DB_Insert">
-      <variables>
-        <variable name="InvokeDB_Insert_InputVariable" messageType="ns3:StuInfoCollection_msg"/>
-      </variables>
-      <sequence name="Sequence2">
-        <assign name="Transformation2">
-          <bpelx:annotation>
-            <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
-          </bpelx:annotation>
-          <copy>
-            <from>ora:doXSLTransformForDoc("../Transformations/FileReadToDBInsert.xsl", $File_Read_InputVariable.body)</from>
-            <to variable="InvokeDB_Insert_InputVariable" part="StuInfoCollection"/>
-          </copy>
-        </assign>
-        <invoke name="InvokeDB_Insert" bpelx:invokeAsDetail="no" partnerLink="DB_Insert_Stu_Info"
-                portType="ns3:DB_Insert_Stu_Info_ptt" operation="merge" inputVariable="InvokeDB_Insert_InputVariable"/>
+      <sequence name="Sequence">
+        <scope name="Scope_File_Write">
+          <variables>
+            <variable name="InvokeStuResultFileWriteInputVariable" messageType="ns2:Write_msg"/>
+          </variables>
+          <sequence name="Sequence1">
+            <assign name="Transformation1">
+              <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from>ora:doXSLTransformForDoc("../Transformations/StuResultTransformation.xsl", $File_Read_InputVariable.body)</from>
+                <to variable="InvokeStuResultFileWriteInputVariable" part="body"/>
+              </copy>
+            </assign>
+            <invoke name="InvokeStuResult" partnerLink="File_Write_stuResult" portType="ns2:Write_ptt" operation="Write"
+                    inputVariable="InvokeStuResultFileWriteInputVariable" bpelx:invokeAsDetail="no">
+              <bpelx:toProperties>
+                <bpelx:toProperty name="jca.file.FileName" variable="FILE_NAME"/>
+                
+              </bpelx:toProperties>
+            </invoke>
+          </sequence>
+        </scope>
       </sequence>
-    </scope>
+      <sequence name="Sequence3">
+        <scope name="Scope_DB_Insert">
+          <variables>
+            <variable name="InvokeDB_Insert_InputVariable" messageType="ns3:StuInfoCollection_msg"/>
+          </variables>
+          <sequence name="Sequence2">
+            <assign name="Transformation2">
+              <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from>ora:doXSLTransformForDoc("../Transformations/FileReadToDBInsert.xsl", $File_Read_InputVariable.body)</from>
+                <to variable="InvokeDB_Insert_InputVariable" part="StuInfoCollection"/>
+              </copy>
+            </assign>
+            <invoke name="InvokeDB_Insert" bpelx:invokeAsDetail="no" partnerLink="DB_Insert_Stu_Info"
+                    portType="ns3:DB_Insert_Stu_Info_ptt" operation="merge"
+                    inputVariable="InvokeDB_Insert_InputVariable"/>
+          </sequence>
+        </scope>
+      </sequence>
+    </flow>
   </sequence>
 </process>

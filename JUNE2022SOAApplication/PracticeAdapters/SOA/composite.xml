@@ -17,6 +17,8 @@
           location="WSDLs/File_Write_stuResult.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/PracticeAdapters/DB_Insert_Stu_Info"
           location="WSDLs/DB_Insert_Stu_Info.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/JUNE2022SOAApplication/PracticeAdapters/Stu_Result_JMSProducer"
+          location="WSDLs/Stu_Result_JMSProducer.wsdl" importType="wsdl"/>
   <service name="File_Read_stuInfo" ui:wsdlLocation="WSDLs/File_Read_stuInfo.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/file/JUNE2022SOAApplication/PracticeAdapters/File_Read_stuInfo#wsdl.interface(Read_ptt)"/>
     <binding.jca config="Adapters/File_Read_stuInfo_file.jca">
@@ -37,6 +39,9 @@
       <reference name="DB_Insert_Stu_Info" ui:wsdlLocation="WSDLs/DB_Insert_Stu_Info.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/PracticeAdapters/DB_Insert_Stu_Info#wsdl.interface(DB_Insert_Stu_Info_ptt)"/>
       </reference>
+      <reference name="Stu_Result_JMSProducer" ui:wsdlLocation="WSDLs/Stu_Result_JMSProducer.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/JUNE2022SOAApplication/PracticeAdapters/Stu_Result_JMSProducer#wsdl.interface(Produce_Message_ptt)"/>
+      </reference>
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
     <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">sync</property>
@@ -55,6 +60,10 @@
       <property name="jca.retry.maxInterval" type="xs:int" many="false" override="may">120</property>
     </binding.jca>
   </reference>
+  <reference name="Stu_Result_JMSProducer" ui:wsdlLocation="WSDLs/Stu_Result_JMSProducer.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/JUNE2022SOAApplication/PracticeAdapters/Stu_Result_JMSProducer#wsdl.interface(Produce_Message_ptt)"/>
+    <binding.jca config="Adapters/Stu_Result_JMSProducer_jms.jca"/>
+  </reference>
   <wire>
     <source.uri>File_Read_stuInfo</source.uri>
     <target.uri>PracticeAdapterBPEL/File_Read_stuInfo</target.uri>
@@ -66,5 +75,9 @@
   <wire>
     <source.uri>PracticeAdapterBPEL/DB_Insert_Stu_Info</source.uri>
     <target.uri>DB_Insert_Stu_Info</target.uri>
+  </wire>
+  <wire>
+    <source.uri>PracticeAdapterBPEL/Stu_Result_JMSProducer</source.uri>
+    <target.uri>Stu_Result_JMSProducer</target.uri>
   </wire>
 </composite>

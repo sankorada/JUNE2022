@@ -1,0 +1,45 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Fri Aug 26 07:32:30 IST 2022
+  Author:  DELL
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/JUNE2022SOAApplication/JMSConsumerProject/BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/JUNE2022SOAApplication/JMSConsumerProject/BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/JUNE2022SOAApplication/JMSConsumerProject/StuResult_JMSConsumer"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="StuResult_JMSConsumer" partnerLinkType="ns1:Consume_Message_plt" myRole="Consume_Message_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Consume_Message_InputVariable" messageType="ns1:Consume_Message_msg"/>
+    <variable name="headerPropertyVar" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes" partnerLink="StuResult_JMSConsumer"
+             portType="ns1:Consume_Message_ptt" operation="Consume_Message"
+             variable="Receive1_Consume_Message_InputVariable">
+      <bpelx:fromProperties>
+        <bpelx:fromProperty name="jca.jms.JMSProperty.filename" variable="headerPropertyVar"/>
+      </bpelx:fromProperties>
+    </receive>
+  </sequence>
+</process>

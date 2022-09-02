@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Tue Aug 23 07:39:03 IST 2022
+  Author:  DELL
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/JUNE2022SOAApplication/PracticeLogicalPolling/BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/JUNE2022SOAApplication/PracticeLogicalPolling/BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/PracticeLogicalPolling/STU_GRADE_POLLING"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/PracticeLogicalPolling/STU_GRADE_POLLING"
+          location="../WSDLs/STU_GRADE_POLLING.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="STU_GRADE_POLLING" partnerLinkType="ns1:STU_GRADE_POLLING_plt" myRole="STU_GRADE_POLLING_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="InputVariable" messageType="ns1:StuResultCollection_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" partnerLink="STU_GRADE_POLLING" portType="ns1:STU_GRADE_POLLING_ptt" operation="receive"
+             variable="InputVariable" createInstance="yes"/>
+  </sequence>
+</process>

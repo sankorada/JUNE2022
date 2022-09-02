@@ -47,6 +47,7 @@
                      <tns:grade>C</tns:grade>
                   </xsl:otherwise>
                </xsl:choose>
+               <tns:status>NEW</tns:status>
             </tns:StuResult>
          </xsl:for-each>
       </tns:StuResultCollection>

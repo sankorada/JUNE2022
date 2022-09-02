@@ -17,7 +17,8 @@
                xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
                xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
          xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/CalculateStuGrade/STU_INFO_DBPOLLING"
-         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/CalculateStuGrade/STU_GRADE_INSERT">
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/CalculateStuGrade/STU_GRADE_INSERT"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
 
   <!--
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,6 +27,9 @@
      services integrated within this business process
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/JUNE2022SOAApplication/CalculateStuGrade/STU_INFO_DBPOLLING"
+          location="../WSDLs/STU_INFO_DBPOLLING.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
   <partnerLinks>
     <partnerLink name="STU_INFO_DBPOLLING" partnerLinkType="ns1:STU_INFO_DBPOLLING_plt"
                  myRole="STU_INFO_DBPOLLING_role"/>

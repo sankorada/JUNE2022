@@ -13,6 +13,7 @@
    <entry key="STU_RESULT.STATUS:db_column_size">10</entry>
    <entry key="STU_RESULT.GRADE:db_column_not_null">false</entry>
    <entry key="STU_RESULT:db_column_2">TOTAL_MARKS</entry>
+   <entry key="return_single_result_set">false</entry>
    <entry key="STU_RESULT:db_column_1">STU_NAME</entry>
    <entry key="STU_RESULT:db_column_0">STU_ID</entry>
    <entry key="STU_RESULT.STU_NAME:db_column_type">VARCHAR2</entry>
@@ -22,7 +23,7 @@
    <entry key="STU_RESULT.STU_ID:db_column_type">NUMBER</entry>
    <entry key="STU_RESULT.STU_ID:db_column_precision">38</entry>
    <entry key="STU_RESULT.GRADE:db_column_size">20</entry>
-   <entry key="STU_RESULT.TOTAL_MARKS:db_column_type">NUMBER</entry>
    <entry key="root_descriptor_alias">STU_RESULT</entry>
+   <entry key="STU_RESULT.TOTAL_MARKS:db_column_type">NUMBER</entry>
    <entry key="STU_RESULT.STU_NAME:db_column_size">20</entry>
 </properties>

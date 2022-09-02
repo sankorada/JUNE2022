@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/STU_GRADE_INSERT" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/STU_GRADE_INSERT" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/STU_GRADE_POLLING" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/STU_GRADE_POLLING" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
    <xs:element name="StuResultCollection" type="StuResultCollection"/>
    <xs:complexType name="StuResultCollection">
       <xs:sequence>
